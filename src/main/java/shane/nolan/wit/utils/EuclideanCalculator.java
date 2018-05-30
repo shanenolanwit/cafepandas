@@ -1,9 +1,12 @@
 package shane.nolan.wit.utils;
 
+/**
+ * Based on https://en.wikipedia.org/wiki/Euclidean_distance
+ * @author Shane Nolan
+ *
+ */
 public class EuclideanCalculator implements DimensionalCalculator {
 	
-	
-
 	@Override
 	public double distance(MultiDimensionalPoint a, MultiDimensionalPoint b) {
 		double total = 0.0;
@@ -12,12 +15,5 @@ public class EuclideanCalculator implements DimensionalCalculator {
 		}
 		return Math.sqrt(total);
 	}
-	
-	
-	
-	
-
-
-
 	
 }

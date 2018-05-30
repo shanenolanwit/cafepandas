@@ -6,23 +6,31 @@ import java.util.List;
 import shane.nolan.wit.utils.MultiDimensionalPoint;
 import shane.nolan.wit.utils.MultiDimensionalPointUtils;
 
+/**
+ * 
+ * @author Shane Nolan
+ *
+ */
 public class KmeansCluster {
 
-	private final MultiDimensionalPoint centroid;
 	private final List<MultiDimensionalPoint> nodes;
-	
-	public KmeansCluster(MultiDimensionalPoint centroid, List<MultiDimensionalPoint> nodes) {
-		super();
-		this.centroid = centroid;
-		this.nodes = nodes;
-	}
-	
+	private final MultiDimensionalPoint centroid;
+
+	/**
+	 * Creates a new cluster using the provided nodes
+	 * Centroid is automatically calculated using provided nodes
+	 * @param nodes
+	 */
 	public KmeansCluster(List<MultiDimensionalPoint> nodes){
 		super();		
 		this.nodes = nodes;
 		this.centroid = findCentroid();
 	}
 	
+	/**
+	 * Creates an empty cluster, provided centroid will be used when deciding what nodes to add
+	 * @param centroid
+	 */
 	public KmeansCluster(MultiDimensionalPoint centroid) {
 		super();
 		this.centroid = centroid;
@@ -38,7 +46,7 @@ public class KmeansCluster {
 	}
 	
 	public MultiDimensionalPoint findCentroid(){
-		return MultiDimensionalPointUtils.average(getNodes());
+		return MultiDimensionalPointUtils.mean(getNodes());
 	}
 
 	@Override

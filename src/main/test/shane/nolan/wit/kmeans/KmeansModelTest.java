@@ -3,9 +3,11 @@ import org.junit.Test;
 
 import shane.nolan.wit.utils.EuclideanCalculator;
 import shane.nolan.wit.utils.MultiDimensionalPoint;
+import shane.nolan.wit.utils.MultiDimensionalPointUtils;
 
 import static org.junit.Assert.*;
 
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,9 +45,9 @@ public class KmeansModelTest {
         MultiDimensionalPoint p2 = new MultiDimensionalPoint(Arrays.asList(6.0, 6.333333333333333));
         MultiDimensionalPoint p3 = new MultiDimensionalPoint(Arrays.asList(0.3333333333333333, 0.3333333333333333));
         MultiDimensionalPoint p4 = new MultiDimensionalPoint(Arrays.asList(7.0,0.333));
-        assertTrue(model.getCentroids().stream().anyMatch(c -> c.equals(p1)));
-        assertTrue(model.getCentroids().stream().anyMatch(c -> c.equals(p2)));
-        assertTrue(model.getCentroids().stream().anyMatch(c -> c.equals(p3)));
-        assertFalse(model.getCentroids().stream().anyMatch(c -> c.equals(p4)));
+        assertTrue(model.getCentroids().stream().anyMatch(c -> MultiDimensionalPointUtils.equals(c, p1, 10, RoundingMode.HALF_UP)));
+        assertTrue(model.getCentroids().stream().anyMatch(c -> MultiDimensionalPointUtils.equals(c, p2, 10, RoundingMode.HALF_UP)));
+        assertTrue(model.getCentroids().stream().anyMatch(c -> MultiDimensionalPointUtils.equals(c, p3, 10, RoundingMode.HALF_UP)));
+        assertFalse(model.getCentroids().stream().anyMatch(c -> MultiDimensionalPointUtils.equals(c, p4, 10, RoundingMode.HALF_UP)));
     }
 }

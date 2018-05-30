@@ -1,5 +1,6 @@
 package shane.nolan.wit.kmeans;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,10 @@ public class KmeansModel {
 	private final int maxIterations;
 	private final DimensionalCalculator calculator;
 	
+	//Scale and Rounding Mode used for tweaking equality method
+	private final int scale;
+	private final RoundingMode roundingMode;
+	
 	/**
 	 * 
 	 * @param nodes
@@ -30,9 +35,13 @@ public class KmeansModel {
 			List<MultiDimensionalPoint> nodes, 
 			int k, 
 			int maxIterations, 
-			DimensionalCalculator calculator){
+			DimensionalCalculator calculator,
+			int scale,
+			RoundingMode roundingMode){
 		this.k = k;		
-		this.maxIterations = maxIterations;		
+		this.maxIterations = maxIterations;	
+		this.scale = scale;
+		this.roundingMode = roundingMode;
 		this.nodes = nodes;
 		this.calculator = calculator;
 		this.centroids = getRandomCentroids();		
@@ -43,12 +52,15 @@ public class KmeansModel {
 	public KmeansModel(
 			List<MultiDimensionalPoint> nodes, 
 			List<MultiDimensionalPoint> centroids, 
-			int k, int maxIterations, 
+			int k, 
+			int maxIterations, 
 			DimensionalCalculator calculator 
 			){
 		this.k = k;		
 		this.calculator = calculator;
-		this.maxIterations = maxIterations;		
+		this.maxIterations = maxIterations;	
+		this.scale = 10;
+		this.roundingMode = RoundingMode.HALF_UP;
 		this.nodes = nodes;
 		this.centroids = centroids;		
 		this.clusters = assignNodesToCentroids();
@@ -65,7 +77,7 @@ public class KmeansModel {
 			setCentroids(newCentroids);
 			setClusters(assignNodesToCentroids());			
 			
-			if(MultiDimensionalPointUtils.equals(oldCentroids,getCentroids())){
+			if(MultiDimensionalPointUtils.equals(oldCentroids,getCentroids(),getScale(),getRoundingMode())){
 				centroidsMatch = true;
 				System.out.println("Centroids match at iteration " + i);				
 			} else{
@@ -151,6 +163,14 @@ public class KmeansModel {
 
 	public int getMaxIterations() {
 		return maxIterations;
+	}
+
+	public int getScale() {
+		return scale;
+	}
+
+	public RoundingMode getRoundingMode() {
+		return roundingMode;
 	}
 
 	private List<MultiDimensionalPoint> getRandomCentroids(){

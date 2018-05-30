@@ -1,34 +1,30 @@
 package shane.nolan.wit.utils;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 
+ * @author Shane Nolan
+ *
+ */
 public class MultiDimensionalPoint {
 	
+	//List of dimensional values eg [4,8,2] would be 4 on the x axis, 8 on the y axis, 2 on the z axis etc
 	private final List<Double> coords;
+	
+	public MultiDimensionalPoint(Double... coords){
+		this.coords = Arrays.asList(coords);
+	}
 
 	public MultiDimensionalPoint(List<Double> coords) {
 		super();
 		this.coords = coords;
 	}
-
+	
 	public List<Double> getCoords() {
 		return coords;
 	}
-	
-	public boolean equals(MultiDimensionalPoint other){
-		boolean eq = this.getCoords().size() == other.getCoords().size();
-		int size = this.getCoords().size();
-		int i = 0;
-		while(i < size && eq){
-			double a = new BigDecimal(this.getCoords().get(i)).setScale(10, RoundingMode.HALF_UP).doubleValue();
-			double b = new BigDecimal(other.getCoords().get(i)).setScale(10, RoundingMode.HALF_UP).doubleValue();
-			eq = (a == b);
-			i++;
-		}
-		return eq;
-	}	
 
 	@Override
 	public String toString() {
