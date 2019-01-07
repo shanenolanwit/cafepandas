@@ -14,5 +14,5 @@ cache:
   - $HOME/.m2
   - $HOME/.gradle
   
-  before_script: 
-   - chmod +x gradlew
+before_install:
+ - chmod +x gradlew
