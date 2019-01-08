@@ -1,4 +1,6 @@
 # cafepandas
+[![Build Status](https://travis-ci.org/shanenolanwit/cafepandas.svg?branch=master)](https://travis-ci.org/shanenolanwit/cafepandas)\
+
 Miscellaneous data mining experiments with Java\
 The goal is to duplicate some of the functionality found in the python libraries [pandas](https://pandas.pydata.org/) and [scikit-learn](https://scikit-learn.org/stable/index.html).
 
@@ -10,4 +12,6 @@ The first step is implementing [K-means clustering](https://en.wikipedia.org/wik
 
 
 [K-means in scikit learn](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html, "sklearn.cluster.KMeans")
+
+
 
